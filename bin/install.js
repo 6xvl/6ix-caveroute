@@ -37,6 +37,7 @@ const HOOK_FILES = [
   'caveman-config.js',
   'caveman-activate.js',
   'caveman-mode-tracker.js',
+  'caveman-route.js',
   'caveman-stats.js',
   'caveman-statusline.sh',
   'caveman-statusline.ps1',
@@ -717,6 +718,18 @@ async function installHooks(ctx) {
   // chmod statusline (no-op on Windows)
   try { fs.chmodSync(path.join(hooksDir, 'caveman-statusline.sh'), 0o755); } catch (_) {}
 
+  // caveman-route map -> CLAUDE_CONFIG_DIR (not hooksDir; the route hook reads
+  // it from the config dir). Copy only if absent, so user edits to the map
+  // survive reinstalls. Absent map = caveman-route is a silent no-op.
+  const routeMapDest = path.join(configDir, 'caveman-route-map.json');
+  if (!fs.existsSync(routeMapDest) && sourceDir
+      && fs.existsSync(path.join(sourceDir, 'caveman-route-map.json'))) {
+    try {
+      fs.copyFileSync(path.join(sourceDir, 'caveman-route-map.json'), routeMapDest);
+      process.stdout.write(`  installed: ${routeMapDest}\n`);
+    } catch (_) {}
+  }
+
   // Merge into settings.json
   let settings = SETTINGS.readSettings(settingsPath);
   if (settings === null) {
@@ -734,6 +747,7 @@ async function installHooks(ctx) {
   const node = absoluteNodePath();
   const activate = path.join(hooksDir, 'caveman-activate.js');
   const tracker  = path.join(hooksDir, 'caveman-mode-tracker.js');
+  const route    = path.join(hooksDir, 'caveman-route.js');
   const statusline = path.join(hooksDir, 'caveman-statusline.sh');
 
   // Migrate any legacy bare-`node` invocations of our managed scripts.
@@ -751,6 +765,15 @@ async function installHooks(ctx) {
     marker: 'caveman-mode-tracker',
     timeout: 5,
     statusMessage: 'Tracking caveman mode...',
+  });
+
+  // caveman-route — deterministic skill-router hint. No-op unless a
+  // caveman-route-map.json exists in CLAUDE_CONFIG_DIR.
+  SETTINGS.addCommandHook(settings, 'UserPromptSubmit', {
+    command: `"${node}" "${route}"`,
+    marker: 'caveman-route',
+    timeout: 5,
+    statusMessage: 'Routing skills...',
   });
 
   // Statusline — set if absent or already pointing at our script.

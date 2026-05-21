@@ -1,0 +1,34 @@
+{
+  "_comment": "caveman-route default map. Copy to <CLAUDE_CONFIG_DIR>/caveman-route-map.json. Keys = skill names, values = case-insensitive substring keywords. Keep keywords specific. Tuned for a reverse-engineering + Roblox-dev skill set; edit freely.",
+
+  "re": ["reverse engineer", "decompile", "re this", "disassemble", "offset", "protocol analysis", "how does this work", "deep dive", "binary", "what does this do"],
+  "decompiling-protected-binaries": ["themida", "obsidium", "eazfuscator", "vmprotect", "packed", "obfuscated", "unpack", "anti-debug", "string decryption", "rtti"],
+
+  "roblox-security": ["server authority", "validate remote", "rate limit", "anti-cheat", "exploitable"],
+  "roblox-opsec": ["security review", "security audit", "harden", "exploit surface", "dupe", "duplication exploit", "ban wave", "before publishing"],
+  "exploit-check": ["exploit vector", "movement hack", "scan for exploits", "check for exploits"],
+  "remotes-audit": ["remoteevent", "remotefunction", "remote audit", "audit remotes"],
+  "datastore-review": ["audit datastore", "session lock", "datastore review", "data loss"],
+
+  "luau-best-practices": ["luau", "clean code", "best practice", "module pattern", "service pattern", "memory leak"],
+  "luau-type-expert": ["type error", "--!strict", "strict mode", "type annotation", "luau-lsp", "type mismatch", "generic type"],
+  "luau-lint": ["lint", "selene", "static analysis", "deprecated api"],
+  "code-review": ["review this code", "code review", "review the change", "review my"],
+  "karpathy-guidelines": ["refactor", "before coding", "overcomplicated", "simplify this", "is this overengineered"],
+
+  "rojo-pro": ["rojo", "project.json", "rojo serve", "rojo build", "wally", "aftman", "sync issue"],
+  "roblox-gui": ["screengui", "billboardgui", "surfacegui", "udim2", "frame layout", "hud", "responsive ui", "tweenservice"],
+  "roblox-mcp-ui-editing": ["edit_script_lines", "set_script_source", "insert_script_lines", "portrait mode", "landscape mode"],
+  "roblox-datastores": ["datastore", "save data", "load data", "player data", "leaderboard", "auto-save"],
+  "roblox-remote-events": ["fireserver", "fireclient", "remote event", "client-server", "onserverevent"],
+  "roblox-animations": ["animationtrack", "humanoid animation", "play animation", "animation priority"],
+  "roblox-performance": ["fps drop", "lag", "optimize performance", "draw call", "microprofiler", "streamingenabled"],
+  "roblox-monetization": ["gamepass", "developer product", "robux", "premium payout", "monetization"],
+  "roblox-game-dev": ["roblox studio mcp", "execute_luau", "build a roblox", "create npc", "pathfinding"],
+
+  "graphify": ["knowledge graph", "graphify", "map the codebase", "architecture graph"],
+  "decompiling-protected-binaries ": ["malware", "rat ", "incident response"],
+  "sync": ["push identity", "pull identity", "sync brain", "identity sync"],
+  "gdd": ["game design document", "write the gdd", "design doc"],
+  "doctor": ["health check the repo", "repo doctor"]
+}
